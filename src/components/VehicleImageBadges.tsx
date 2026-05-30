@@ -6,9 +6,15 @@ type VehicleImageBadgesProps = {
 
 const MAX_IMAGE_BADGES = 3;
 
-const allowedBadgeTypes = new Set(["lowKm", "noAccident", "oneOwner"]);
+function isAllowedBadge(badge: VehicleImageBadge) {
+  return (
+    badge.type === "lowKm" ||
+    badge.type === "noAccident" ||
+    badge.type === "oneOwner"
+  );
+}
 
-function getImageBadgeClass(type: string) {
+function getImageBadgeClass(type: VehicleImageBadge["type"]) {
   const base =
     "inline-flex w-fit items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-black uppercase tracking-wide shadow-[0_10px_28px_rgba(0,0,0,0.45)] backdrop-blur-md ring-1";
 
@@ -19,8 +25,6 @@ function getImageBadgeClass(type: string) {
       return `${base} border border-white/20 bg-black/90 text-white ring-white/30`;
     case "oneOwner":
       return `${base} bg-blue-500/25 text-blue-100 ring-blue-300/55`;
-    default:
-      return `${base} bg-black/75 text-white ring-white/20`;
   }
 }
 
@@ -29,9 +33,7 @@ function normalizeLabel(label: string) {
 }
 
 export default function VehicleImageBadges({ badges = [] }: VehicleImageBadgesProps) {
-  const visible = badges
-    .filter((badge) => allowedBadgeTypes.has(badge.type))
-    .slice(0, MAX_IMAGE_BADGES);
+  const visible = badges.filter(isAllowedBadge).slice(0, MAX_IMAGE_BADGES);
 
   if (visible.length === 0) return null;
 
