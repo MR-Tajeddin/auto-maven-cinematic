@@ -1,8 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+type ScrollTriggerHandle = {
+  progress: number;
+  kill: () => void;
+};
 
 const CLIP_COUNT = 3;
 const SEGMENT_SIZE = 1 / CLIP_COUNT;
@@ -48,7 +52,7 @@ function seekVideo(video: HTMLVideoElement, time: number) {
 export default function ScrollVideoHero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const scrollTriggerRef = useRef<ScrollTriggerHandle | null>(null);
   const lastClipRef = useRef(0);
   const [activeClip, setActiveClip] = useState(0);
 
@@ -92,8 +96,6 @@ export default function ScrollVideoHero() {
     const isDesktop = window.matchMedia("(min-width: 768px)").matches;
     if (!isDesktop) return;
 
-    gsap.registerPlugin(ScrollTrigger);
-
     const section = sectionRef.current;
     if (!section) return;
 
@@ -101,6 +103,7 @@ export default function ScrollVideoHero() {
     let retryFrame = 0;
     let videosBound = false;
     const cleanups: Array<() => void> = [];
+    let refreshScrollTrigger = () => {};
 
     const getVideos = () =>
       videoRefs.current.filter(Boolean) as HTMLVideoElement[];
@@ -113,8 +116,17 @@ export default function ScrollVideoHero() {
       }
     };
 
-    const setupScrollTrigger = () => {
+    const setupScrollTrigger = async () => {
       if (cancelled || scrollTriggerRef.current) return;
+
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ]);
+      if (cancelled || scrollTriggerRef.current) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+      refreshScrollTrigger = () => ScrollTrigger.refresh();
 
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: section,
@@ -139,7 +151,7 @@ export default function ScrollVideoHero() {
           video.duration &&
           Number.isFinite(video.duration),
       );
-      if (ready) setupScrollTrigger();
+      if (ready) void setupScrollTrigger();
     };
 
     const bindVideos = () => {
@@ -166,7 +178,7 @@ export default function ScrollVideoHero() {
 
         const onMeta = () => {
           onMetaReady();
-          trySetup();
+          void trySetup();
         };
 
         video.addEventListener("loadedmetadata", onMeta);
@@ -177,7 +189,7 @@ export default function ScrollVideoHero() {
         });
 
         if (video.readyState >= 1 && video.duration) {
-          onMeta();
+          void onMeta();
         } else {
           video.load();
         }
@@ -194,12 +206,12 @@ export default function ScrollVideoHero() {
       }
 
       const resizeObserver = new ResizeObserver(() => {
-        ScrollTrigger.refresh();
+        refreshScrollTrigger();
       });
       resizeObserver.observe(section);
       cleanups.push(() => resizeObserver.disconnect());
 
-      const onLoad = () => ScrollTrigger.refresh();
+      const onLoad = () => refreshScrollTrigger();
       window.addEventListener("load", onLoad);
       cleanups.push(() => window.removeEventListener("load", onLoad));
     };
@@ -220,7 +232,10 @@ export default function ScrollVideoHero() {
 
   return (
     <div id="cinematic-hero" className="bg-black">
-      <section ref={sectionRef} className="relative hidden h-[330vh] bg-black md:block">
+      <section
+        ref={sectionRef}
+        className="relative hidden h-[330vh] bg-black md:block"
+      >
         <div className="sticky top-0 z-30 h-screen overflow-hidden bg-black">
           {clips.map((clip, index) => (
             <video
@@ -231,7 +246,8 @@ export default function ScrollVideoHero() {
               src={clip.src}
               muted
               playsInline
-              preload="auto"
+              preload="none"
+              poster="/hero/keyframe/keyframe-01-showroom-wide.png"
               className={`absolute inset-0 h-full w-full origin-center object-cover scale-[1.08] -translate-y-[2%] transition-opacity duration-500 ${
                 activeClip === index ? "z-10 opacity-100" : "z-0 opacity-0"
               }`}
@@ -242,12 +258,13 @@ export default function ScrollVideoHero() {
       </section>
 
       <section className="relative min-h-[100svh] overflow-hidden bg-black md:hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-[1.05]"
-          style={{
-            backgroundImage:
-              "url('/hero/keyframe/keyframe-01-showroom-wide.png')",
-          }}
+        <Image
+          src="/hero/keyframe/keyframe-01-showroom-wide.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="scale-[1.05] object-cover object-center"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(212,175,55,0.22),transparent_34%),linear-gradient(to_bottom,rgba(0,0,0,0.18),rgba(0,0,0,0.55),rgba(0,0,0,0.98))]" />
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent" />

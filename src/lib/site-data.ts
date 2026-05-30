@@ -10,7 +10,7 @@ export const mapEmbedUrl =
 export const mapDirectionsUrl =
   "https://www.google.com/maps/dir/?api=1&destination=1639+Bayview+Ave,+East+York,+ON+M4G+3B5";
 
-export const siteUrl = "https://automaven.ca";
+export const siteUrl = "https://www.automaven.ca";
 export const dealershipEmail = "info@automaven.ca";
 export const smsHref = "sms:+14167868958";
 

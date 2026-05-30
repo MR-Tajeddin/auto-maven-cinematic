@@ -5,13 +5,14 @@ import VehicleInventoryImage from "@/components/VehicleInventoryImage";
 import {
   FINANCE_ESTIMATE_EVENT,
   getWhatsAppUrl,
+  siteUrl,
   type Vehicle,
 } from "@/lib/site-data";
 
 const glassCard =
   "rounded-2xl border border-white/10 bg-white/[0.04] shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl";
 
-const vehiclePageLink = "https://automaven.ca/#inventory";
+const vehiclePageLink = `${siteUrl}/#inventory`;
 
 type VehicleInventoryCardProps = {
   vehicle: Vehicle;

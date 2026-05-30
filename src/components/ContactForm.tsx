@@ -39,18 +39,21 @@ export default function ContactForm() {
     <div className="grid gap-4">
       <input
         className={fieldClass}
+        aria-label="Full name"
         placeholder="Full Name"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
       />
       <input
         className={fieldClass}
+        aria-label="Phone number"
         placeholder="Phone Number"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
       <input
         className={fieldClass}
+        aria-label="Email address"
         placeholder="Email Address"
         type="email"
         value={email}
@@ -58,6 +61,7 @@ export default function ContactForm() {
       />
       <select
         className={fieldClass}
+        aria-label="Inquiry type"
         value={intent}
         onChange={(e) => setIntent(e.target.value)}
       >
@@ -70,6 +74,7 @@ export default function ContactForm() {
       </select>
       <textarea
         className={`${fieldClass} min-h-32 resize-y`}
+        aria-label="Message"
         placeholder="Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -77,7 +82,7 @@ export default function ContactForm() {
       <a
         href={whatsappHref}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className="rounded-full bg-[#d4af37] px-6 py-3 text-center text-sm font-bold text-black transition hover:bg-[#e6c35c]"
       >
         Send Message on WhatsApp

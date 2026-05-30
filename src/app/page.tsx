@@ -5,10 +5,6 @@ import ScrollVideoHero from "@/components/ScrollVideoHero";
 import SiteChrome from "@/components/SiteChrome";
 import VehicleInventoryCard from "@/components/VehicleInventoryCard";
 import VehicleSourcingForm from "@/components/VehicleSourcingForm";
-
-
-
-
 import FinanceCalculator from "@/components/FinanceCalculator";
 import {
   businessHours,
@@ -429,6 +425,7 @@ export default function Home() {
                   src="/brand/logo.jpeg"
                   alt="Auto Maven"
                   fill
+                  sizes="144px"
                   className="object-cover"
                 />
               </div>

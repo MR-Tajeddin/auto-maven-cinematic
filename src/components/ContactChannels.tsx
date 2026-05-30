@@ -100,7 +100,7 @@ export default function ContactChannels() {
           key={label}
           href={href}
           target={external ? "_blank" : undefined}
-          rel={external ? "noreferrer" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
           className={`${glassCard} group flex items-center gap-5 p-5 transition duration-300 hover:-translate-y-0.5 hover:border-[#d4af37]/50 hover:bg-white/[0.07] md:p-6`}
         >
           <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] transition duration-300 group-hover:border-[#d4af37]/50 group-hover:bg-[#d4af37]/15">

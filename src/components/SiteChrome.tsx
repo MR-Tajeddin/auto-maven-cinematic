@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navLinks, phoneDisplay, phoneHref } from "@/lib/site-data";
 
 type SiteChromeProps = {
@@ -17,39 +17,57 @@ export default function SiteChrome({
   dealershipAddress,
 }: SiteChromeProps) {
   const [headerVisible, setHeaderVisible] = useState(true);
+  const headerVisibleRef = useRef(true);
 
   useEffect(() => {
+    let ticking = false;
+    let frame = 0;
+
+    const setVisible = (visible: boolean) => {
+      if (headerVisibleRef.current === visible) return;
+      headerVisibleRef.current = visible;
+      setHeaderVisible(visible);
+    };
+
     const updateChrome = () => {
+      ticking = false;
       const scrollY = window.scrollY;
       const inventory = document.getElementById("inventory");
 
       if (!inventory) {
-        setHeaderVisible(true);
+        setVisible(true);
         return;
       }
 
       const inventoryTop = inventory.offsetTop;
 
       if (scrollY <= SCROLL_TOP_THRESHOLD) {
-        setHeaderVisible(true);
+        setVisible(true);
         return;
       }
 
       if (scrollY >= inventoryTop - INVENTORY_REVEAL_OFFSET) {
-        setHeaderVisible(true);
+        setVisible(true);
         return;
       }
 
-      setHeaderVisible(false);
+      setVisible(false);
+    };
+
+    const requestChromeUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      frame = requestAnimationFrame(updateChrome);
     };
 
     updateChrome();
-    window.addEventListener("scroll", updateChrome, { passive: true });
-    window.addEventListener("resize", updateChrome);
+    window.addEventListener("scroll", requestChromeUpdate, { passive: true });
+    window.addEventListener("resize", requestChromeUpdate);
 
     return () => {
-      window.removeEventListener("scroll", updateChrome);
-      window.removeEventListener("resize", updateChrome);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", requestChromeUpdate);
+      window.removeEventListener("resize", requestChromeUpdate);
     };
   }, []);
 
@@ -82,6 +100,7 @@ export default function SiteChrome({
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-2.5">
           <a
             href="#"
+            aria-label="Auto Maven home"
             className="relative h-10 w-36 shrink-0 overflow-hidden rounded-lg border border-white/10"
           >
             <Image

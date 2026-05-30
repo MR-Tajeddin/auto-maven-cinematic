@@ -33,7 +33,7 @@ export default function VehicleInventoryImage({
       alt={alt}
       fill
       className="object-cover transition duration-500 group-hover:scale-105"
-      sizes="(max-width: 768px) 100vw, 33vw"
+      sizes="(max-width: 768px) calc(100vw - 40px), (max-width: 1280px) calc((100vw - 60px) / 2), 400px"
       onError={() => setFailed(true)}
     />
   );
