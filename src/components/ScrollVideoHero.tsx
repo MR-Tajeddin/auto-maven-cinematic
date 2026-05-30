@@ -48,11 +48,9 @@ function seekVideo(video: HTMLVideoElement, time: number) {
 export default function ScrollVideoHero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
-  const mobileVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
   const lastClipRef = useRef(0);
   const [activeClip, setActiveClip] = useState(0);
-  const [mobileClip, setMobileClip] = useState(0);
 
   const syncVideosToProgress = useCallback((progress: number) => {
     const videos = videoRefs.current.filter(Boolean) as HTMLVideoElement[];
@@ -220,58 +218,6 @@ export default function ScrollVideoHero() {
     };
   }, [syncVideosToProgress]);
 
-  useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-    if (isDesktop) return;
-
-    const videos = mobileVideoRefs.current.filter(Boolean) as HTMLVideoElement[];
-    if (!videos.length) return;
-
-    videos.forEach((video, index) => {
-      video.muted = true;
-      video.playsInline = true;
-      video.preload = index === mobileClip ? "auto" : "metadata";
-      video.setAttribute("playsinline", "");
-      video.setAttribute("webkit-playsinline", "");
-
-      if (index !== mobileClip) {
-        video.pause();
-        try {
-          video.currentTime = 0;
-        } catch {
-          // metadata not ready
-        }
-      }
-    });
-
-    const activeVideo = videos[mobileClip];
-    if (!activeVideo) return;
-
-    const play = () => {
-      activeVideo.play().catch(() => {
-        // Mobile browsers may wait for a user gesture; the poster/first frame remains visible.
-      });
-    };
-
-    const onEnded = () => {
-      setMobileClip((current) => Math.min(current + 1, CLIP_COUNT - 1));
-    };
-
-    activeVideo.addEventListener("loadeddata", play, { once: true });
-    activeVideo.addEventListener("ended", onEnded);
-
-    if (activeVideo.readyState >= 2) {
-      play();
-    } else {
-      activeVideo.load();
-    }
-
-    return () => {
-      activeVideo.removeEventListener("loadeddata", play);
-      activeVideo.removeEventListener("ended", onEnded);
-    };
-  }, [mobileClip]);
-
   return (
     <div id="cinematic-hero" className="bg-black">
       <section ref={sectionRef} className="relative hidden h-[330vh] bg-black md:block">
@@ -296,60 +242,58 @@ export default function ScrollVideoHero() {
       </section>
 
       <section className="relative min-h-[100svh] overflow-hidden bg-black md:hidden">
-        {clips.map((clip, index) => (
-          <video
-            key={`mobile-${clip.src}`}
-            ref={(element) => {
-              mobileVideoRefs.current[index] = element;
-            }}
-            src={clip.src}
-            muted
-            playsInline
-            preload={index === 0 ? "auto" : "metadata"}
-            poster="/hero/keyframe/keyframe-01-showroom-wide.png"
-            className={`absolute inset-0 h-full w-full origin-center object-cover scale-[1.24] transition-opacity duration-700 ${
-              mobileClip === index ? "z-10 opacity-100" : "z-0 opacity-0"
-            }`}
-            aria-hidden={mobileClip !== index}
-          />
-        ))}
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-[1.05]"
+          style={{
+            backgroundImage:
+              "url('/hero/keyframe/keyframe-01-showroom-wide.png')",
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(212,175,55,0.22),transparent_34%),linear-gradient(to_bottom,rgba(0,0,0,0.18),rgba(0,0,0,0.55),rgba(0,0,0,0.98))]" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/70 to-transparent" />
 
-        <div className="absolute inset-0 z-20 bg-gradient-to-t from-black via-black/20 to-black/20" />
-        <div className="absolute inset-x-0 bottom-0 z-30 px-5 pb-10 pt-24">
-          <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#d4af37]">
+        <div className="relative z-10 flex min-h-[100svh] flex-col justify-end px-5 pb-9 pt-28">
+          <div className="mb-5 inline-flex w-fit rounded-full border border-[#d4af37]/30 bg-black/35 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.28em] text-[#d4af37] backdrop-blur-md">
+            Toronto / GTA Automotive Sourcing
+          </div>
+
+          <h1 className="max-w-sm text-5xl font-black leading-[0.9] tracking-tight text-white drop-shadow-2xl">
             Auto Maven
-          </p>
-          <h1 className="mt-3 max-w-sm text-4xl font-black leading-none tracking-tight text-white">
-            Buy. Sell. Trade. Source.
           </h1>
-          <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">
-            Premium automotive guidance and vehicle sourcing across Toronto and the GTA.
+
+          <p className="mt-4 max-w-sm text-lg font-semibold leading-6 text-white/90">
+            Buy. Sell. Trade. Source.
           </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <p className="mt-3 max-w-sm text-sm leading-6 text-white/62">
+            Premium used vehicle guidance, market-based pricing, financing, and custom sourcing across Toronto and the GTA.
+          </p>
+
+          <div className="mt-6 grid grid-cols-1 gap-3">
             <a
               href="#inventory"
-              className="rounded-full bg-[#d4af37] px-4 py-3 text-center text-sm font-bold text-black transition hover:bg-[#e6c35c]"
+              className="rounded-full bg-[#d4af37] px-5 py-3.5 text-center text-sm font-black text-black shadow-[0_14px_40px_rgba(212,175,55,0.25)] transition hover:bg-[#e6c35c]"
             >
-              Inventory
+              Browse Inventory
             </a>
             <a
               href="#find-my-car"
-              className="rounded-full border border-white/20 bg-black/30 px-4 py-3 text-center text-sm font-bold text-white backdrop-blur transition hover:border-[#d4af37] hover:text-[#d4af37]"
+              className="rounded-full border border-white/20 bg-white/[0.06] px-5 py-3.5 text-center text-sm font-bold text-white backdrop-blur-md transition hover:border-[#d4af37] hover:text-[#d4af37]"
             >
               Find My Car
             </a>
           </div>
 
-          <div className="mt-5 flex gap-2">
-            {clips.map((clip, index) => (
-              <span
-                key={`mobile-dot-${clip.src}`}
-                className={`h-1.5 flex-1 rounded-full transition ${
-                  index <= mobileClip ? "bg-[#d4af37]" : "bg-white/15"
-                }`}
-              />
-            ))}
+          <div className="mt-6 grid grid-cols-3 gap-2 text-center text-[11px] font-semibold uppercase tracking-[0.08em] text-white/62">
+            <span className="rounded-full border border-white/10 bg-black/30 px-2 py-2 backdrop-blur">
+              OMVIC
+            </span>
+            <span className="rounded-full border border-white/10 bg-black/30 px-2 py-2 backdrop-blur">
+              Finance
+            </span>
+            <span className="rounded-full border border-white/10 bg-black/30 px-2 py-2 backdrop-blur">
+              Sourcing
+            </span>
           </div>
         </div>
       </section>
