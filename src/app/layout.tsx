@@ -7,10 +7,11 @@ export const metadata: Metadata = {
     "Smarter way to buy, sell, and source cars in Toronto. OMVIC-licensed dealership with market-based guidance, flexible financing, and trade-in support.",
   icons: {
     icon: [
-      { url: "/brand/logo.jpeg", type: "image/jpeg" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
     ],
-    shortcut: "/brand/logo.jpeg",
-    apple: "/brand/logo.jpeg",
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
 };
 
