@@ -5,6 +5,13 @@ export const metadata: Metadata = {
   title: "Auto Maven | Luxury Used Vehicles Toronto / GTA",
   description:
     "Smarter way to buy, sell, and source cars in Toronto. OMVIC-licensed dealership with market-based guidance, flexible financing, and trade-in support.",
+  icons: {
+    icon: [
+      { url: "/brand/logo.jpeg", type: "image/jpeg" },
+    ],
+    shortcut: "/brand/logo.jpeg",
+    apple: "/brand/logo.jpeg",
+  },
 };
 
 export default function RootLayout({
