@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #03050a;
+  --foreground: #f4f4f5;
+  --gold: #d4af37;
+  --gold-soft: #e6c35c;
+  --navy: #06101d;
+  --silver: #c4c9d4;
 }
 
 @theme inline {
@@ -12,15 +16,54 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 35%, transparent);
+  color: white;
+}
+
+.finance-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--gold) 0%,
+    var(--gold) var(--slider-percent, 0%),
+    rgba(255, 255, 255, 0.12) var(--slider-percent, 0%),
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  outline: none;
+}
+
+.finance-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid #0a0f18;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25);
+  cursor: pointer;
+}
+
+.finance-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid #0a0f18;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25);
+  cursor: pointer;
 }
