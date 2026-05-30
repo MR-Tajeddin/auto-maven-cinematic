@@ -14,7 +14,7 @@ function isAllowedBadge(badge: VehicleImageBadge) {
   );
 }
 
-function getImageBadgeClass(type: VehicleImageBadge["type"]) {
+function getImageBadgeClass(type: VehicleImageBadge["type"]): string {
   const base =
     "inline-flex w-fit items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-black uppercase tracking-wide shadow-[0_10px_28px_rgba(0,0,0,0.45)] backdrop-blur-md ring-1";
 
@@ -25,6 +25,8 @@ function getImageBadgeClass(type: VehicleImageBadge["type"]) {
       return `${base} border border-white/20 bg-black/90 text-white ring-white/30`;
     case "oneOwner":
       return `${base} bg-blue-500/25 text-blue-100 ring-blue-300/55`;
+    default:
+      return `${base} bg-black/75 text-white ring-white/20`;
   }
 }
 
