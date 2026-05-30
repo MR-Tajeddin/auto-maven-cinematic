@@ -106,25 +106,12 @@ export const trustStrip = [
   },
 ];
 
-/** Badge types map to future Google Sheet boolean/enum columns. */
-export type VehicleImageBadgeType =
-  | "carfax"
-  | "cleanCarfax"
-  | "lowKm"
-  | "oneOwner"
-  | "cleanTitle"
-  | "greatDeal"
-  | "freshSafety"
-  | "commercialReady"
-  | "commercial"
-  | "luxury"
-  | "highDemand"
-  | "family"
-  | "truck"
-  | "van"
-  | "fuel"
-  | "performance"
-  | "default";
+/**
+ * Badge types map directly to future Google Sheet boolean columns.
+ * Do not infer these in code; set them from inventory data:
+ * lowKm, noAccident, oneOwner.
+ */
+export type VehicleImageBadgeType = "lowKm" | "noAccident" | "oneOwner";
 
 export type VehicleImageBadge = {
   label: string;
@@ -139,7 +126,7 @@ export type Vehicle = {
   image: string;
   description: string;
   badges: string[];
-  /** Future Google Sheet fields can map to imageBadges: carfax, cleanCarfax, lowKm, oneOwner, cleanTitle, greatDeal, freshSafety, commercialReady */
+  /** Future Google Sheet fields can map to imageBadges: lowKm, noAccident, oneOwner */
   imageBadges: VehicleImageBadge[];
 };
 
@@ -155,8 +142,8 @@ export const vehicles: Vehicle[] = [
       "Premium compact luxury sedan with AWD confidence, sport styling, and strong Toronto/GTA resale appeal.",
     badges: ["AWD", "Luxury Sedan", "Carfax Available"],
     imageBadges: [
-      { label: "CARFAX", type: "carfax" },
-      { label: "Luxury Pick", type: "luxury" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -170,9 +157,8 @@ export const vehicles: Vehicle[] = [
       "Practical compact SUV with Toyota reliability, strong demand, and family-friendly utility.",
     badges: ["AWD", "SUV", "Certified Available"],
     imageBadges: [
-      { label: "Clean Carfax", type: "cleanCarfax" },
-      { label: "Great Deal", type: "greatDeal" },
-      { label: "High Demand", type: "highDemand" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -188,7 +174,7 @@ export const vehicles: Vehicle[] = [
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
       { label: "One Owner", type: "oneOwner" },
-      { label: "Clean Title", type: "cleanTitle" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -202,9 +188,8 @@ export const vehicles: Vehicle[] = [
       "Full-size pickup with 4x4 capability, towing utility, and broad buyer appeal across the GTA.",
     badges: ["4x4", "Truck", "Work Ready"],
     imageBadges: [
-      { label: "CARFAX", type: "carfax" },
-      { label: "4x4", type: "truck" },
-      { label: "Work Ready", type: "commercial" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -218,8 +203,8 @@ export const vehicles: Vehicle[] = [
       "Sport luxury sedan with xDrive AWD, premium interior, and attractive finance-market demand.",
     badges: ["xDrive", "Sport Sedan", "Luxury"],
     imageBadges: [
-      { label: "Luxury Pick", type: "luxury" },
-      { label: "Clean Title", type: "cleanTitle" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -233,8 +218,8 @@ export const vehicles: Vehicle[] = [
       "Premium AWD SUV with quattro traction, leather, and strong used luxury SUV demand.",
     badges: ["quattro", "Luxury SUV", "AWD"],
     imageBadges: [
-      { label: "Clean Carfax", type: "cleanCarfax" },
-      { label: "Great Deal", type: "greatDeal" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -248,8 +233,8 @@ export const vehicles: Vehicle[] = [
       "Affordable family minivan with practical seating, cargo flexibility, and strong value for budget-conscious buyers.",
     badges: ["Minivan", "Family Value", "Budget Friendly"],
     imageBadges: [
-      { label: "Family Value", type: "family" },
-      { label: "Budget Friendly", type: "greatDeal" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -263,8 +248,8 @@ export const vehicles: Vehicle[] = [
       "Commercial cargo van with medium roof utility, strong business demand, and excellent work-ready flexibility.",
     badges: ["Cargo Van", "Business Ready", "Medium Roof"],
     imageBadges: [
-      { label: "Commercial Ready", type: "commercialReady" },
-      { label: "Medium Roof", type: "van" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -278,8 +263,8 @@ export const vehicles: Vehicle[] = [
       "Compact commercial van ideal for deliveries, trades, service routes, and small business operations.",
     badges: ["Compact Van", "Commercial", "Fuel Efficient"],
     imageBadges: [
-      { label: "Commercial", type: "commercial" },
-      { label: "Fuel Efficient", type: "fuel" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -293,8 +278,8 @@ export const vehicles: Vehicle[] = [
       "White full-size pickup with 4x4 capability, work-truck appeal, towing utility, and strong value in the used truck market.",
     badges: ["4x4", "Pickup", "Work Truck"],
     imageBadges: [
-      { label: "4x4", type: "truck" },
-      { label: "Work Truck", type: "commercial" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -308,8 +293,8 @@ export const vehicles: Vehicle[] = [
       "White family minivan with Toyota reliability, strong resale value, spacious seating, and high demand among GTA families.",
     badges: ["Minivan", "Family", "Toyota Reliability"],
     imageBadges: [
-      { label: "Family Van", type: "family" },
-      { label: "Clean Title", type: "cleanTitle" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
   {
@@ -323,8 +308,9 @@ export const vehicles: Vehicle[] = [
       "Black premium sports coupe with iconic performance, luxury presence, and high-end enthusiast appeal.",
     badges: ["Sports Car", "Luxury", "Performance"],
     imageBadges: [
-      { label: "Luxury Pick", type: "luxury" },
-      { label: "Performance", type: "performance" },
+      { label: "Low KM", type: "lowKm" },
+      { label: "One Owner", type: "oneOwner" },
+      { label: "No Accident", type: "noAccident" },
     ],
   },
 ];
