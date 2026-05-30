@@ -200,7 +200,7 @@ export default function VehicleSourcingForm() {
             className={`${fieldClass} min-h-[110px] resize-y`}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="AWD, 7 seats, hybrid, clean Carfax, low KM, leather, sunroof, white/black color, etc."
+            placeholder="AWD, 7 seats, hybrid, low KM, one owner, no accident, leather, sunroof, white/black color, etc."
           />
         </div>
       </div>

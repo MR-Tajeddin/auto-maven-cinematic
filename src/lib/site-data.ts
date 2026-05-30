@@ -126,7 +126,7 @@ export type Vehicle = {
   image: string;
   description: string;
   badges: string[];
-  /** Future Google Sheet fields can map to imageBadges: lowKm, noAccident, oneOwner */
+  /** Future Google Sheet fields can map to imageBadges: lowKm, noAccident, oneOwner. */
   imageBadges: VehicleImageBadge[];
 };
 
@@ -140,7 +140,7 @@ export const vehicles: Vehicle[] = [
       "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80",
     description:
       "Premium compact luxury sedan with AWD confidence, sport styling, and strong Toronto/GTA resale appeal.",
-    badges: ["AWD", "Luxury Sedan", "Carfax Available"],
+    badges: ["AWD", "Luxury Sedan", "Premium Sedan"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
       { label: "No Accident", type: "noAccident" },
@@ -170,7 +170,7 @@ export const vehicles: Vehicle[] = [
       "https://commons.wikimedia.org/wiki/Special:FilePath/2022%20Honda%20Civic%20Sedan%20EX%20in%20Platinum%20White%20Pearl%2C%20front%20left.jpg",
     description:
       "Reliable compact sedan with low ownership cost, strong resale value, and everyday usability.",
-    badges: ["Sedan", "Fuel Efficient", "Carfax Available"],
+    badges: ["Sedan", "Fuel Efficient", "Compact"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
       { label: "One Owner", type: "oneOwner" },
@@ -186,7 +186,7 @@ export const vehicles: Vehicle[] = [
       "https://images.unsplash.com/photo-1605893477799-b99e3b8b93fe?auto=format&fit=crop&w=1200&q=80",
     description:
       "Full-size pickup with 4x4 capability, towing utility, and broad buyer appeal across the GTA.",
-    badges: ["4x4", "Truck", "Work Ready"],
+    badges: ["4x4", "Truck", "Tow Utility"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
       { label: "No Accident", type: "noAccident" },
@@ -231,7 +231,7 @@ export const vehicles: Vehicle[] = [
       "https://commons.wikimedia.org/wiki/Special:FilePath/Dodge%20Grand%20Caravan%20SE%203.6%202015%20%2823281927634%29.jpg",
     description:
       "Affordable family minivan with practical seating, cargo flexibility, and strong value for budget-conscious buyers.",
-    badges: ["Minivan", "Family Value", "Budget Friendly"],
+    badges: ["Minivan", "Family", "Budget Friendly"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
       { label: "No Accident", type: "noAccident" },
@@ -306,7 +306,7 @@ export const vehicles: Vehicle[] = [
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
     description:
       "Black premium sports coupe with iconic performance, luxury presence, and high-end enthusiast appeal.",
-    badges: ["Sports Car", "Luxury", "Performance"],
+    badges: ["Sports Car", "Luxury", "Sports Coupe"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
       { label: "One Owner", type: "oneOwner" },

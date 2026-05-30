@@ -25,8 +25,6 @@ function getImageBadgeClass(type: VehicleImageBadge["type"]): string {
       return `${base} border border-white/20 bg-black/90 text-white ring-white/30`;
     case "oneOwner":
       return `${base} bg-blue-500/25 text-blue-100 ring-blue-300/55`;
-    default:
-      return `${base} bg-black/75 text-white ring-white/20`;
   }
 }
 
