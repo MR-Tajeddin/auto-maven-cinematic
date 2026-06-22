@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const title = "Auto Maven | Luxury Used Vehicles Toronto / GTA";
+const title = "Auto Maven | Vehicle Sourcing & Auto Consulting Toronto / GTA";
 const description =
-  "Smarter way to buy, sell, and source cars in Toronto. OMVIC-licensed dealership with market-based guidance, flexible financing, and trade-in support.";
+  "Automotive consulting, vehicle sourcing assistance, market guidance, payment estimate support, and trade-in guidance for Toronto and the GTA.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.automaven.ca"),
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         url: "/brand/logo.jpeg",
         width: 1536,
         height: 1024,
-        alt: "Auto Maven luxury used vehicle dealership in Toronto",
+        alt: "Auto Maven automotive consulting and vehicle sourcing in Toronto",
       },
     ],
   },
