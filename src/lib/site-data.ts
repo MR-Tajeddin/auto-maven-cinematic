@@ -14,6 +14,9 @@ export const siteUrl = "https://www.automaven.ca";
 export const dealershipEmail = "info@automaven.ca";
 export const smsHref = "sms:+14167868958";
 
+export const legalDisclaimer =
+  "Auto Maven provides automotive consulting, vehicle sourcing assistance, market guidance, and related support. Auto Maven is not currently registered as a motor vehicle dealer. Vehicle sales, payment arrangements, licensing, and final transaction paperwork, where applicable, are completed through an OMVIC-registered dealer or licensed partner.";
+
 export const getWhatsAppUrl = (message: string) =>
   `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
@@ -32,22 +35,22 @@ export function getVehicleInquiryWhatsAppUrl(vehicle: {
   mileage: string;
   priceDisplay: string;
 }) {
-  const message = `Hi Auto Maven, I would like more information about this vehicle:
+  const message = `Hi Auto Maven, I would like sourcing guidance about this vehicle type:
 
-Vehicle: ${vehicle.name}
+Vehicle example: ${vehicle.name}
 Mileage: ${vehicle.mileage}
-Price: ${vehicle.priceDisplay}
+Reference price: ${vehicle.priceDisplay}
 Page: ${siteUrl}/#inventory
 
-Please send me more details, availability, and next steps.`;
+Please send me market guidance and next steps.`;
 
   return getWhatsAppUrl(message);
 }
 
 export const navLinks = [
-  { href: "#inventory", label: "Inventory" },
+  { href: "#inventory", label: "Market Examples" },
   { href: "#find-my-car", label: "Find My Car" },
-  { href: "#finance", label: "Finance" },
+  { href: "#finance", label: "Payment Guide" },
   { href: "#trade", label: "Trade-In" },
   { href: "#services", label: "Services" },
   { href: "#location", label: "Location" },
@@ -57,15 +60,15 @@ export const navLinks = [
 export const sourcingSteps = [
   {
     title: "Share Your Criteria",
-    text: "Tell us what vehicle you want and your budget.",
+    text: "Tell us what vehicle you want and your target budget.",
   },
   {
     title: "We Search the Market",
-    text: "We check retail, wholesale, auction, and dealer sources.",
+    text: "We review retail, wholesale, auction, and dealer-market options.",
   },
   {
     title: "Review Your Options",
-    text: "We send you suitable options with clear numbers and next steps.",
+    text: "We send suitable examples with clear market guidance and next steps.",
   },
 ];
 
@@ -73,36 +76,36 @@ export const sourcingTrustBadges = [
   "Market-Based Search",
   "Toronto/GTA",
   "Wholesale + Retail Insight",
-  "OMVIC Licensed",
+  "Sourcing Support",
 ];
 
 export const heroTrustBadges = [
-  "OMVIC Licensed",
+  "Vehicle Sourcing",
   "Toronto/GTA",
   "Wholesale + Retail Insight",
-  "Flexible Financing",
+  "Payment Estimate Guidance",
 ];
 
 export const trustStrip = [
   {
-    title: "OMVIC Licensed",
+    title: "Sourcing Support",
     description:
-      "Registered Ontario dealer with compliant sales practices and consumer protection.",
+      "Guidance for locating suitable vehicles through retail, wholesale, auction, and partner channels.",
   },
   {
-    title: "Market-Based Pricing",
+    title: "Market-Based Guidance",
     description:
-      "Listings and guidance grounded in wholesale, retail, and real GTA market movement.",
+      "Advice grounded in wholesale, retail, and real GTA market movement.",
   },
   {
-    title: "Financing Support",
+    title: "Payment Estimate Support",
     description:
-      "Flexible lender options with transparent terms for a wide range of credit profiles.",
+      "Estimate payment scenarios with transparent inputs before you move forward.",
   },
   {
-    title: "Vehicle Sourcing",
+    title: "Trade-In Guidance",
     description:
-      "We locate specific makes and models through dealer, auction, and wholesale networks.",
+      "Understand market value, resale position, and practical next steps for your current vehicle.",
   },
 ];
 
@@ -139,7 +142,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Premium compact luxury sedan with AWD confidence, sport styling, and strong Toronto/GTA resale appeal.",
+      "Premium compact luxury sedan example with AWD confidence, sport styling, and strong Toronto/GTA market appeal.",
     badges: ["AWD", "Luxury Sedan", "Premium Sedan"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -154,8 +157,8 @@ export const vehicles: Vehicle[] = [
     image:
       "https://commons.wikimedia.org/wiki/Special:FilePath/Toyota%20RAV4%202.5L%20LTD%20HEV%202022%20%282%29.jpg",
     description:
-      "Practical compact SUV with Toyota reliability, strong demand, and family-friendly utility.",
-    badges: ["AWD", "SUV", "Certified Available"],
+      "Compact SUV sourcing example with Toyota reliability, strong demand, and family-friendly utility.",
+    badges: ["AWD", "SUV", "High Demand"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
       { label: "No Accident", type: "noAccident" },
@@ -169,7 +172,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://commons.wikimedia.org/wiki/Special:FilePath/2022%20Honda%20Civic%20Sedan%20EX%20in%20Platinum%20White%20Pearl%2C%20front%20left.jpg",
     description:
-      "Reliable compact sedan with low ownership cost, strong resale value, and everyday usability.",
+      "Compact sedan sourcing example with low ownership cost, strong resale value, and everyday usability.",
     badges: ["Sedan", "Fuel Efficient", "Compact"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -185,7 +188,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://images.unsplash.com/photo-1605893477799-b99e3b8b93fe?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Full-size pickup with 4x4 capability, towing utility, and broad buyer appeal across the GTA.",
+      "Full-size pickup sourcing example with 4x4 capability, towing utility, and broad GTA buyer appeal.",
     badges: ["4x4", "Truck", "Tow Utility"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -200,7 +203,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Sport luxury sedan with xDrive AWD, premium interior, and attractive finance-market demand.",
+      "Sport luxury sedan example with xDrive AWD, premium interior, and attractive market demand.",
     badges: ["xDrive", "Sport Sedan", "Luxury"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -215,7 +218,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Premium AWD SUV with quattro traction, leather, and strong used luxury SUV demand.",
+      "Premium AWD SUV example with quattro traction, leather, and strong used luxury SUV demand.",
     badges: ["quattro", "Luxury SUV", "AWD"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -230,7 +233,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://commons.wikimedia.org/wiki/Special:FilePath/Dodge%20Grand%20Caravan%20SE%203.6%202015%20%2823281927634%29.jpg",
     description:
-      "Affordable family minivan with practical seating, cargo flexibility, and strong value for budget-conscious buyers.",
+      "Affordable family minivan example with practical seating, cargo flexibility, and budget-friendly value.",
     badges: ["Minivan", "Family", "Budget Friendly"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -245,7 +248,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://commons.wikimedia.org/wiki/Special:FilePath/2023%20Ford%20Transit%20250%20Medium%20Roof%20130%22%20WB%20AWD%20in%20Oxford%20White%2C%20front%20right%2C%202025-05-02.jpg",
     description:
-      "Commercial cargo van with medium roof utility, strong business demand, and excellent work-ready flexibility.",
+      "Commercial cargo van example with medium roof utility, strong business demand, and work-ready flexibility.",
     badges: ["Cargo Van", "Business Ready", "Medium Roof"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -260,7 +263,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://commons.wikimedia.org/wiki/Special:FilePath/2018%20Ford%20Transit%20Connect%20200%201.5%20Front.jpg",
     description:
-      "Compact commercial van ideal for deliveries, trades, service routes, and small business operations.",
+      "Compact commercial van example for deliveries, trades, service routes, and small business use.",
     badges: ["Compact Van", "Commercial", "Fuel Efficient"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -275,7 +278,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://images.unsplash.com/photo-1605893477799-b99e3b8b93fe?auto=format&fit=crop&w=1200&q=80",
     description:
-      "White full-size pickup with 4x4 capability, work-truck appeal, towing utility, and strong value in the used truck market.",
+      "Full-size pickup example with 4x4 capability, work-truck appeal, towing utility, and used-truck value.",
     badges: ["4x4", "Pickup", "Work Truck"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -290,7 +293,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://commons.wikimedia.org/wiki/Special:FilePath/2020%20Toyota%20Sienna%20FWD%20LE%208-Passenger%20in%20Super%20White%2C%20front%20right.jpg",
     description:
-      "White family minivan with Toyota reliability, strong resale value, spacious seating, and high demand among GTA families.",
+      "Family minivan example with Toyota reliability, strong resale value, spacious seating, and high GTA demand.",
     badges: ["Minivan", "Family", "Toyota Reliability"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -305,7 +308,7 @@ export const vehicles: Vehicle[] = [
     image:
       "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Black premium sports coupe with iconic performance, luxury presence, and high-end enthusiast appeal.",
+      "Premium sports coupe example with iconic performance, luxury presence, and enthusiast appeal.",
     badges: ["Sports Car", "Luxury", "Sports Coupe"],
     imageBadges: [
       { label: "Low KM", type: "lowKm" },
@@ -317,12 +320,12 @@ export const vehicles: Vehicle[] = [
 
 export const services = [
   {
-    title: "Used Vehicle Sales",
-    text: "Hand-selected inventory with transparent pricing, history review, and clear buying guidance.",
+    title: "Vehicle Purchase Guidance",
+    text: "Market research, history review, pricing context, and clear next-step guidance before you commit.",
   },
   {
-    title: "Vehicle Sourcing",
-    text: "Tell us what you want. We search retail, wholesale, auction, and dealer networks across Ontario.",
+    title: "Vehicle Sourcing Support",
+    text: "Tell us what you want. We help review retail, wholesale, auction, and partner-market options across Ontario.",
   },
   {
     title: "Accident & Bodywork Support",
@@ -330,29 +333,29 @@ export const services = [
   },
   {
     title: "Dealer / Auction Consulting",
-    text: "Auction analysis, max bid strategy, repair cost review, and flip-profit calculations.",
+    text: "Auction analysis, max-bid strategy, repair cost review, and resale-potential calculations.",
   },
 ];
 
 export const financeHighlights = [
   {
-    title: "Fast Pre-Approval",
-    text: "Understand your budget early so you can shop with confidence and clarity.",
+    title: "Budget Planning",
+    text: "Understand a realistic payment range early so you can shop with confidence and clarity.",
   },
   {
-    title: "All Credit Welcome",
-    text: "Newcomers, first-time buyers, and credit rebuilders — we work with specialized lenders.",
+    title: "Scenario Guidance",
+    text: "Compare down payment, rate, and term assumptions before speaking with a licensed dealer or lender.",
   },
   {
-    title: "Transparent Terms",
-    text: "Rate, term, payment, and total cost explained before you commit to anything.",
+    title: "Transparent Inputs",
+    text: "Rate, term, payment, and total-cost assumptions are shown clearly before you move forward.",
   },
 ];
 
 export const tradeInSteps = [
   "Share vehicle details",
-  "Receive market-based estimate",
-  "Apply trade value toward next purchase",
+  "Receive market-based guidance",
+  "Review options with a licensed partner where applicable",
 ];
 
 export const footerQuickLinks = [
