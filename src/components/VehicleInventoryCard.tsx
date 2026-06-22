@@ -24,19 +24,19 @@ function roundDownPayment(price: number) {
 
 function buildInquiryMessage(vehicle: Vehicle) {
   return [
-    "Hi Auto Maven, I would like more information about this vehicle:",
+    "Hi Auto Maven, I would like sourcing guidance about this vehicle type:",
     "",
-    `Vehicle: ${vehicle.name}`,
+    `Vehicle example: ${vehicle.name}`,
     `Mileage: ${vehicle.mileage}`,
-    `Price: ${vehicle.priceDisplay}`,
+    `Reference price: ${vehicle.priceDisplay}`,
     `Page: ${vehiclePageLink}`,
     "",
-    "Please send me more details, availability, and next steps.",
+    "Please send me market guidance and next steps.",
   ].join("\n");
 }
 
 export default function VehicleInventoryCard({ vehicle }: VehicleInventoryCardProps) {
-  const handleFinanceEstimate = () => {
+  const handlePaymentEstimate = () => {
     const downPayment = Math.min(roundDownPayment(vehicle.price), vehicle.price);
 
     window.dispatchEvent(
@@ -98,10 +98,10 @@ export default function VehicleInventoryCard({ vehicle }: VehicleInventoryCardPr
         <div className="mt-auto grid grid-cols-2 gap-2 pt-5">
           <button
             type="button"
-            onClick={handleFinanceEstimate}
+            onClick={handlePaymentEstimate}
             className="rounded-full bg-[#d4af37] px-3 py-2.5 text-center text-xs font-bold text-black transition hover:bg-[#e6c35c]"
           >
-            Finance Estimate
+            Payment Estimate
           </button>
           <a
             href={getWhatsAppUrl(buildInquiryMessage(vehicle))}
@@ -109,7 +109,7 @@ export default function VehicleInventoryCard({ vehicle }: VehicleInventoryCardPr
             rel="noreferrer"
             className="rounded-full border border-white/20 bg-black/30 px-3 py-2.5 text-center text-xs font-bold text-white backdrop-blur transition hover:border-[#d4af37]/50 hover:text-[#d4af37]"
           >
-            Request More Info
+            Request Sourcing Help
           </a>
         </div>
       </div>
