@@ -13,6 +13,7 @@ import {
   financeHighlights,
   footerQuickLinks,
   getWhatsAppUrl,
+  legalDisclaimer,
   mapDirectionsUrl,
   mapEmbedUrl,
   phoneDisplay,
@@ -38,18 +39,18 @@ export default function Home() {
 
       <ScrollVideoHero />
 
-      {/* 3. Featured Inventory */}
+      {/* 3. Market Examples */}
       <section id="inventory" className="mx-auto max-w-7xl px-5 py-12">
         <div className="mb-6 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#d4af37]">
-            Inventory
+            Market Examples
           </p>
           <h2 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">
-            Featured Market Examples
+            Market & Sourcing Examples
           </h2>
           <p className="mt-4 text-sm leading-6 text-white/50">
-            Real Auto Maven inventory will be connected later through Google
-            Sheets and Cloudinary.
+            These examples show the type of vehicles Auto Maven can help you
+            research, compare, and source through appropriate market channels.
           </p>
         </div>
 
@@ -74,16 +75,16 @@ export default function Home() {
               Custom Vehicle Sourcing Request
             </h2>
             <p className="mt-2 text-lg font-medium text-[#d4af37]/90">
-              Tell us what you want. We&apos;ll source it for you.
+              Tell us what you want. We&apos;ll help you search the market.
             </p>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
             <div>
               <p className="leading-7 text-white/55">
-                Looking for a specific vehicle? Tell us your ideal make, model,
-                budget, mileage, and must-have features. Auto Maven will help
-                search retail, wholesale, auction, and dealer networks across
+                Looking for a specific vehicle? Share your ideal make, model,
+                budget, mileage, and must-have features. Auto Maven helps review
+                retail, wholesale, auction, and partner-market options across
                 Toronto and the GTA.
               </p>
 
@@ -138,32 +139,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Finance Section */}
+      {/* 6. Payment Section */}
       <section id="finance" className="border-y border-white/[0.08] bg-[#050a14]/60 px-5 py-12">
         <div className="mx-auto max-w-7xl">
           <div className="mb-6 max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#d4af37]">
-              Financing
+              Payment Guide
             </p>
             <h2 className="mt-3 text-4xl font-black md:text-5xl">
-              Flexible Auto Financing
+              Vehicle Payment Estimate
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/55">
-              Estimate your monthly payment using vehicle price, down payment,
-              interest rate, and term.
+              Estimate a monthly payment scenario using vehicle price, down
+              payment, interest rate, and term. This is guidance only.
             </p>
             <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-[#c4c9d4]">
               <li className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-                Fast Pre-Approval
+                Budget Planning
               </li>
               <li className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-                All Credit Welcome
+                Scenario Guidance
               </li>
               <li className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-                Transparent Terms
+                Transparent Inputs
               </li>
             </ul>
           </div>
@@ -189,12 +190,12 @@ export default function Home() {
               Trade-In
             </p>
             <h2 className="mt-3 text-4xl font-black leading-tight">
-              Trade smarter with market-based value
+              Trade smarter with market-based guidance
             </h2>
             <p className="mt-5 leading-7 text-white/55">
-              We evaluate your vehicle using wholesale insight, retail demand,
-              and GTA market trends — then apply your trade value toward your
-              next purchase.
+              We help you review your vehicle using wholesale insight, retail
+              demand, and GTA market trends so you understand your position
+              before moving forward.
             </p>
 
             <ol className="mt-6 space-y-4">
@@ -211,13 +212,13 @@ export default function Home() {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
                 href={getWhatsAppUrl(
-                  "Hi Auto Maven, I would like a trade-in appraisal for my vehicle.",
+                  "Hi Auto Maven, I would like market guidance for my trade-in vehicle.",
                 )}
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-full bg-[#d4af37] px-7 py-3 text-center text-sm font-bold text-black transition hover:bg-[#e6c35c]"
               >
-                Get Trade-In Value
+                Get Trade-In Guidance
               </a>
               <a
                 href={phoneHref}
@@ -232,19 +233,19 @@ export default function Home() {
             {[
               {
                 title: "Wholesale Insight",
-                text: "Real auction and dealer data behind every estimate.",
+                text: "Auction and dealer-market context behind every estimate.",
               },
               {
                 title: "No Pressure",
-                text: "Clear numbers explained before you commit to a deal.",
+                text: "Clear numbers explained before you commit to any next step.",
               },
               {
-                title: "Instant Equity",
-                text: "Apply trade value to reduce down payment or monthly cost.",
+                title: "Market Position",
+                text: "Understand how your vehicle may fit into current demand.",
               },
               {
-                title: "Sell Outright",
-                text: "Not buying? We can still help you sell at fair market value.",
+                title: "Sell or Trade",
+                text: "Review practical options for selling, trading, or sourcing your next vehicle.",
               },
             ].map((card) => (
               <div
@@ -335,7 +336,7 @@ export default function Home() {
 
           <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
             <iframe
-              title="Auto Maven dealership on Google Maps"
+              title="Auto Maven location on Google Maps"
               src={mapEmbedUrl}
               className="h-[320px] w-full border-0 md:h-[400px]"
               loading="lazy"
@@ -355,13 +356,13 @@ export default function Home() {
             </a>
             <a
               href={getWhatsAppUrl(
-                "Hi Auto Maven, I would like to schedule a visit to your dealership.",
+                "Hi Auto Maven, I would like to schedule a consultation or vehicle-sourcing discussion.",
               )}
               target="_blank"
               rel="noreferrer"
               className="rounded-full border border-white/15 px-7 py-3 text-center text-sm font-bold text-white transition hover:border-[#d4af37] hover:text-[#d4af37]"
             >
-              Schedule a Visit
+              Schedule a Consultation
             </a>
           </div>
         </div>
@@ -430,9 +431,9 @@ export default function Home() {
                 />
               </div>
               <p className="mt-4 max-w-sm text-sm leading-6 text-white/50">
-                OMVIC-licensed used vehicle dealership and automotive guidance
-                in Toronto and the GTA — transparent sales, financing, trade-ins,
-                and sourcing.
+                Automotive consulting, vehicle sourcing assistance, market
+                guidance, payment estimate support, and trade-in guidance in
+                Toronto and the GTA.
               </p>
             </div>
 
@@ -467,7 +468,10 @@ export default function Home() {
             </div>
           </div>
 
-          <p className="mt-6 border-t border-white/10 pt-5 text-center text-xs text-white/35">
+          <p className="mt-6 border-t border-white/10 pt-5 text-xs leading-5 text-white/35">
+            {legalDisclaimer}
+          </p>
+          <p className="mt-4 text-center text-xs text-white/35">
             © {new Date().getFullYear()} Auto Maven. {dealershipAddress}. All
             rights reserved.
           </p>
