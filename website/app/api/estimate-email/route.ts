@@ -7,7 +7,9 @@ export async function POST(request:Request){
  const origin=request.headers.get("origin");
  if(!origin || origin!==new URL(request.url).origin)return fail("Please submit from this website.",403);
  const key=process.env.RESEND_API_KEY, from=process.env.ESTIMATE_EMAIL_FROM, to=process.env.ESTIMATE_EMAIL_TO;
- if(process.env.ESTIMATE_EMAIL_ENABLED!=="true"||!key||!from||!to)return fail("Email submission is not available yet. Please use WhatsApp or call us.",503);
+ const smtp=process.env.ESTIMATE_EMAIL_PROVIDER==="smtp";
+ const smtpReady=Boolean(process.env.SMTP_HOST&&process.env.SMTP_USER&&process.env.SMTP_PASS&&["465","587"].includes(process.env.SMTP_PORT||""));
+ if(process.env.ESTIMATE_EMAIL_ENABLED!=="true"||!(smtp?smtpReady:key)||!from||!to)return fail("Email submission is not available yet. Please use WhatsApp or call us.",503);
  if(!request.headers.get("content-type")?.startsWith("multipart/form-data"))return fail("Invalid request.");
  const rateKey=createHash("sha256").update(request.headers.get("x-forwarded-for")?.split(",")[0]||"unknown").digest("hex");
  const now=Date.now();for(const [k,v]of rates)if(v.until<now)rates.delete(k);
@@ -43,6 +45,16 @@ export async function POST(request:Request){
   const names=["fullName","email","phone","contactMethod","vin","year","make","model","repairType","insurance","description"];
   const text="AUTO MAVEN preliminary estimate inquiry\n\n"+names.map(n=>n+": "+get(n)).join("\n")+"\n\nPrivacy consent: yes. Not a repair booking.";
   const id=createHash("sha256").update(JSON.stringify({to,text,attachments})).digest("hex");
+  if(smtp){
+   const {default:nodemailer}=await import("nodemailer");
+   const port=Number(process.env.SMTP_PORT);
+   const transport=nodemailer.createTransport({host:process.env.SMTP_HOST,port,secure:port===465,requireTLS:port===587,auth:{user:process.env.SMTP_USER,pass:process.env.SMTP_PASS},tls:{minVersion:"TLSv1.2",rejectUnauthorized:true},connectionTimeout:10000,greetingTimeout:10000,socketTimeout:20000,disableFileAccess:true,disableUrlAccess:true});
+   try{
+    const result=await transport.sendMail({from,to,replyTo:get("email"),subject:"AUTO MAVEN — New estimate request",text,attachments:attachments.map(a=>({...a,content:Buffer.from(a.content,"base64")}))});
+    if(!result.accepted?.length||result.rejected?.length)return fail("Email was not accepted. Please try again or use WhatsApp.",502);
+    return Response.json({reference:result.messageId},{headers:{"Cache-Control":"no-store"}});
+   }finally{transport.close()}
+  }
   const response=await fetch("https://api.resend.com/emails",{method:"POST",headers:{Authorization:"Bearer "+key,"Content-Type":"application/json","Idempotency-Key":id},body:JSON.stringify({from,to:[to],reply_to:get("email"),subject:"AUTO MAVEN — New estimate request",text,attachments}),signal:AbortSignal.timeout(15000)});
   const result=await response.json();if(!response.ok||!result.id)return fail("Email was not accepted. Please try again or use WhatsApp.",502);
   return Response.json({reference:result.id},{headers:{"Cache-Control":"no-store"}});
