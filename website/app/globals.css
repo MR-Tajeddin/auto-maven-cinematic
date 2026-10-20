@@ -17,3 +17,13 @@
 .whatsapp-float{position:fixed;bottom:24px;right:24px;z-index:55;background:#19734c;color:white;border-radius:30px;display:flex;align-items:center;gap:9px;padding:13px 18px;box-shadow:0 4px 15px #0002;font-size:12px}.whatsapp-estimate{padding:26px;background:#e9eee7;border:1px solid #cbd9c7;margin-bottom:24px}.whatsapp-estimate h2{font-size:24px;margin-bottom:12px}.whatsapp-estimate p{font-size:12px}.section{padding:65px 0}.about-grid{gap:60px;grid-template-columns:.6fr 1fr}.mascot-frame{max-width:280px}.about-grid h2{font-size:34px}.about-grid .check-list{display:none}.service-card small{display:none}.service-top{margin-bottom:18px}@media(max-width:720px){.whatsapp-float{bottom:70px;right:16px;padding:12px}.whatsapp-float span{display:none}.about-grid{grid-template-columns:1fr;gap:25px}.section{padding:45px 0}.mascot-frame{max-width:220px}}
 
 .estimate-choice{border:1px solid #ccd0d6;padding:16px;margin:18px 0 24px;display:flex;gap:20px;flex-wrap:wrap}.estimate-choice legend{font-weight:600;padding:0 6px}.estimate-choice label{display:flex;align-items:center;gap:8px;cursor:pointer}.estimate-choice input{accent-color:#9a711d}
+
+/* Estimate attachments and actionable validation */
+.photo-input{position:absolute;width:1px!important;height:1px!important;min-height:0!important;opacity:0;padding:0!important;overflow:hidden}
+.field .photo-picker{display:flex;align-items:center;justify-content:center;min-height:48px;padding:12px;border:1px dashed #8b98aa;cursor:pointer;background:#f7f9fb;font-size:14px}
+.field:focus-within .photo-picker{outline:2px solid #bd932d;outline-offset:3px}
+.attachment-list{list-style:none;padding:0;margin:14px 0;display:grid;gap:10px}
+.attachment{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid #dfe2e7;background:#f8fafc;border-radius:6px}
+.attachment>div{flex:1;min-width:0}.attachment strong{display:block;overflow-wrap:anywhere;font-size:13px}.attachment span{font-size:12px;color:#667085}.attachment p{margin:6px 0 0;font-size:12px;color:#a12c20}.attachment.invalid{border-color:#d66758;background:#fff4f1}
+.attachment-remove{flex:0 0 44px;width:44px;height:44px;border:1px solid #d66758;border-radius:6px;background:white;color:#a12c20;font-size:27px;cursor:pointer;line-height:1}
+.attachment-warning{color:#a12c20;font-size:13px}.submission-errors{overflow-wrap:anywhere}.submission-errors ul{padding-left:20px;margin:10px 0}.submission-errors li{margin:8px 0}.submission-errors a{text-decoration:underline}.submission-errors .button{margin-top:12px}.field [aria-invalid="true"]{border-color:#b53728;box-shadow:0 0 0 1px #b53728}.check-field [aria-invalid="true"]{outline:2px solid #b53728}
