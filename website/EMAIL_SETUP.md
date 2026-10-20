@@ -1,9 +1,9 @@
 # Estimate email activation
-Draft: recipient must be confirmed; latest user message says info@atomayvend.ca, existing official address is info@automaven.ca. Never infer or hardcode the destination.
+Owner confirmed recipient: info@automaven.ca.
 Set server-only Vercel production and preview variables using the dashboard:
 - RESEND_API_KEY: a sending key for a verified sender domain.
 - ESTIMATE_EMAIL_FROM: verified sending address.
-- ESTIMATE_EMAIL_TO: recipient explicitly confirmed by the owner.
+- ESTIMATE_EMAIL_TO: info@automaven.ca.
 - ESTIMATE_EMAIL_ENABLED: set to true only after recipient confirmation and delivery testing.
 No secrets belong in GitHub or chat. Redeploy after configuration.
 Email is disabled unless all three exist and the explicit enable flag is true. There is no fake success or mailto attachment workaround.
