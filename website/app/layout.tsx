@@ -14,6 +14,6 @@ export const metadata: Metadata = {
  icons:{icon:"/images/auto-maven-logo.jpg",apple:"/images/auto-maven-logo.jpg"},
 };
 export default function RootLayout({children}:{children:React.ReactNode}){
- const organization={"@context":"https://schema.org","@type":"Organization",name:"AUTO MAVEN INC.",url:"https://automaven.ca",logo:"https://www.automaven.ca/images/auto-maven-logo.jpg",telephone:"+1-416-786-8958",email:"info@automaven.ca",description:"Ontario-based automotive company preparing to launch auto body and paint services. Repair facility coming soon. Corporate office by appointment only.",address:{"@type":"PostalAddress",streetAddress:"1639 Bayview Avenue",addressLocality:"East York",addressRegion:"ON",postalCode:"M4G 3B5",addressCountry:"CA"}};
+ const organization={"@context":"https://schema.org","@type":"Organization",name:"AUTO MAVEN INC.",url:"https://automaven.ca",logo:"https://www.automaven.ca/images/auto-maven-logo.jpg",telephone:"+1-416-786-8958",email:"info@automaven.ca",description:"Ontario-based automotive company preparing to launch auto body and paint services. Repair facility coming soon. Corporate office by appointment only.",address:{"@type":"PostalAddress",streetAddress:"582 Rivermede Rd",addressLocality:"Vaughan",addressRegion:"ON",postalCode:"L4K 2H5",addressCountry:"CA"}};
  return <html lang="en"><body><Header/><main id="main">{children}</main><Footer/><Analytics measurementId={siteConfig.googleAnalyticsId}/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organization)}}/></body></html>
 }
